@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskApp</title>
+    <title>スケジュール管理アプリ</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Ruby on Rails スケジュール管理アプリ</h1>
+      
+    </header>
+      <%= yield %>
+    <footer>
+      <% unless current_page?("/tasks/index") || current_page?("/tasks") %>
+      <h1>現在の日時 : <%= Time.zone.now.to_s(:datetime_jp) %></h1>
+      <% else %>
+      <h1>現在の日時 : <%= Time.zone.now.to_s(:datetime_jp) %> スケジュール合計 : <%= @tasks.count %></h1>
+      <% end %>
+    </footer>
   </body>
 </html>
