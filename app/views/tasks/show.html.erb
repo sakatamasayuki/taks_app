@@ -1,0 +1,32 @@
+<div class ="index-wrapper">
+
+  <h3>スケジュール詳細</h3>
+  
+  <table>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @task.name %></td>
+    </tr>
+    <tr>
+      <th>開始日</th>
+      <td><%= @task.begin.to_s(:date_jp) %></td>
+    </tr>
+    <tr>
+      <th>投稿日</th>
+      <td><%= @task.updated_at.to_s(:datetime_jp) %></td>
+    </tr>
+    <tr>
+      <th>終日</th>
+      <td><%= @task.allday ? '○' : '' %></td>
+    </tr>
+      <tr>
+      <th>スケジュールメモ</th>
+      <td><% unless @task.memo.nil? %><%= safe_join(@task.memo.split("\n"),tag(:br)) %><% end %></td>
+    </tr>
+  </table>
+  <div>
+    <p><%= link_to "スケジュール情報一覧に戻る", :tasks %></p>
+    <p><%= link_to "このスケジュールを編集する", [:edit, @task] %></p>
+    <p><%= link_to "このスケジュールを削除する", @task, data: {turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %></p>
+  </div>
+</div>
